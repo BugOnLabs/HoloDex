@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		088EA79C2CEFDAC100CE9D9A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */; };
 		2CFCD73BBCF533F885C9241A /* Pods_HoloDex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5BBDB6135976EDE1F9B69 /* Pods_HoloDex.framework */; };
 		D88410A82CEFB41A00D031EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88410A52CEFB41A00D031EA /* ContentView.swift */; };
 		D88410A92CEFB41A00D031EA /* HoloDexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88410A62CEFB41A00D031EA /* HoloDexApp.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2AC5BBDB6135976EDE1F9B69 /* Pods_HoloDex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HoloDex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC095F3F5D3EEA0E361BE5C /* Pods-HoloDex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoloDex.debug.xcconfig"; path = "Target Support Files/Pods-HoloDex/Pods-HoloDex.debug.xcconfig"; sourceTree = "<group>"; };
 		D884106D2CEFB05300D031EA /* HoloDex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoloDex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +39,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		088EA7952CEFD86300CE9D9A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		088EA7962CEFD87B00CE9D9A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		088EA7972CEFD88700CE9D9A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				088EA79A2CEFDA9800CE9D9A /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		088EA7982CEFD8A400CE9D9A /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				088EA7992CEFDA1200CE9D9A /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		088EA7992CEFDA1200CE9D9A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		088EA79A2CEFDA9800CE9D9A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		668E4B95A1CAEA7858685436 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +122,10 @@
 		D88410A72CEFB41A00D031EA /* HoloDex */ = {
 			isa = PBXGroup;
 			children = (
+				088EA7952CEFD86300CE9D9A /* Presentation */,
+				088EA7962CEFD87B00CE9D9A /* Domain */,
+				088EA7972CEFD88700CE9D9A /* Data */,
+				088EA7982CEFD8A400CE9D9A /* Infrastructure */,
 				D88410A32CEFB41A00D031EA /* Preview Content */,
 				D88410A42CEFB41A00D031EA /* Assets.xcassets */,
 				D88410A52CEFB41A00D031EA /* ContentView.swift */,
@@ -206,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88410A82CEFB41A00D031EA /* ContentView.swift in Sources */,
+				088EA79C2CEFDAC100CE9D9A /* NetworkService.swift in Sources */,
 				D88410A92CEFB41A00D031EA /* HoloDexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +393,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HoloDex/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
@@ -376,6 +429,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HoloDex/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
