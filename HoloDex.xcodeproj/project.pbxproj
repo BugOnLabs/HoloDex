@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		088EA79C2CEFDAC100CE9D9A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */; };
+		088EA7A12CEFDD4D00CE9D9A /* MoyaNetworkServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EA7A02CEFDD3C00CE9D9A /* MoyaNetworkServiceImpl.swift */; };
+		088EA7A42CEFDE8700CE9D9A /* PokemonTcgApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088EA7A32CEFDE7200CE9D9A /* PokemonTcgApi.swift */; };
 		2CFCD73BBCF533F885C9241A /* Pods_HoloDex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC5BBDB6135976EDE1F9B69 /* Pods_HoloDex.framework */; };
 		D88410A82CEFB41A00D031EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88410A52CEFB41A00D031EA /* ContentView.swift */; };
 		D88410A92CEFB41A00D031EA /* HoloDexApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88410A62CEFB41A00D031EA /* HoloDexApp.swift */; };
 		D88410AA2CEFB41A00D031EA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D88410A22CEFB41A00D031EA /* Preview Assets.xcassets */; };
 		D88410AB2CEFB41A00D031EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D88410A42CEFB41A00D031EA /* Assets.xcassets */; };
+		D8D9A29D2CEFE8A100CF6B77 /* CardDetailsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9A29C2CEFE88800CF6B77 /* CardDetailsAPIResponse.swift */; };
+		D8D9A29F2CEFE98500CF6B77 /* CardsAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D9A29E2CEFE97F00CF6B77 /* CardsAPIResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		088EA7A02CEFDD3C00CE9D9A /* MoyaNetworkServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaNetworkServiceImpl.swift; sourceTree = "<group>"; };
+		088EA7A32CEFDE7200CE9D9A /* PokemonTcgApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTcgApi.swift; sourceTree = "<group>"; };
 		2AC5BBDB6135976EDE1F9B69 /* Pods_HoloDex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HoloDex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAC095F3F5D3EEA0E361BE5C /* Pods-HoloDex.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoloDex.debug.xcconfig"; path = "Target Support Files/Pods-HoloDex/Pods-HoloDex.debug.xcconfig"; sourceTree = "<group>"; };
 		D884106D2CEFB05300D031EA /* HoloDex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoloDex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +30,8 @@
 		D88410A42CEFB41A00D031EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D88410A52CEFB41A00D031EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D88410A62CEFB41A00D031EA /* HoloDexApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoloDexApp.swift; sourceTree = "<group>"; };
+		D8D9A29C2CEFE88800CF6B77 /* CardDetailsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsAPIResponse.swift; sourceTree = "<group>"; };
+		D8D9A29E2CEFE97F00CF6B77 /* CardsAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsAPIResponse.swift; sourceTree = "<group>"; };
 		EE887D2F1AB48002D1261D66 /* Pods-HoloDex.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HoloDex.release.xcconfig"; path = "Target Support Files/Pods-HoloDex/Pods-HoloDex.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +47,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		088EA7952CEFD86300CE9D9A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		088EA7962CEFD87B00CE9D9A /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		088EA7972CEFD88700CE9D9A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				088EA79A2CEFDA9800CE9D9A /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		088EA7982CEFD8A400CE9D9A /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				088EA7992CEFDA1200CE9D9A /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		088EA7992CEFDA1200CE9D9A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				088EA7A22CEFDE4A00CE9D9A /* API */,
+				088EA79D2CEFDCC600CE9D9A /* Providers */,
+				D8D9A29B2CEFE87600CF6B77 /* Models */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		088EA79A2CEFDA9800CE9D9A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				088EA79B2CEFDAB800CE9D9A /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		088EA79D2CEFDCC600CE9D9A /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				088EA79E2CEFDCFF00CE9D9A /* Moya */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		088EA79E2CEFDCFF00CE9D9A /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				088EA7A02CEFDD3C00CE9D9A /* MoyaNetworkServiceImpl.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
+		088EA7A22CEFDE4A00CE9D9A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				088EA7A32CEFDE7200CE9D9A /* PokemonTcgApi.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		668E4B95A1CAEA7858685436 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,12 +157,25 @@
 		D88410A72CEFB41A00D031EA /* HoloDex */ = {
 			isa = PBXGroup;
 			children = (
+				088EA7952CEFD86300CE9D9A /* Presentation */,
+				088EA7962CEFD87B00CE9D9A /* Domain */,
+				088EA7972CEFD88700CE9D9A /* Data */,
+				088EA7982CEFD8A400CE9D9A /* Infrastructure */,
 				D88410A32CEFB41A00D031EA /* Preview Content */,
 				D88410A42CEFB41A00D031EA /* Assets.xcassets */,
 				D88410A52CEFB41A00D031EA /* ContentView.swift */,
 				D88410A62CEFB41A00D031EA /* HoloDexApp.swift */,
 			);
 			path = HoloDex;
+			sourceTree = "<group>";
+		};
+		D8D9A29B2CEFE87600CF6B77 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D8D9A29E2CEFE97F00CF6B77 /* CardsAPIResponse.swift */,
+				D8D9A29C2CEFE88800CF6B77 /* CardDetailsAPIResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DAC3AF63D28481A6A03971CC /* Frameworks */ = {
@@ -205,7 +300,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D9A29D2CEFE8A100CF6B77 /* CardDetailsAPIResponse.swift in Sources */,
+				D8D9A29F2CEFE98500CF6B77 /* CardsAPIResponse.swift in Sources */,
 				D88410A82CEFB41A00D031EA /* ContentView.swift in Sources */,
+				088EA79C2CEFDAC100CE9D9A /* NetworkService.swift in Sources */,
+				088EA7A42CEFDE8700CE9D9A /* PokemonTcgApi.swift in Sources */,
+				088EA7A12CEFDD4D00CE9D9A /* MoyaNetworkServiceImpl.swift in Sources */,
 				D88410A92CEFB41A00D031EA /* HoloDexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HoloDex/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
@@ -376,6 +477,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HoloDex/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
