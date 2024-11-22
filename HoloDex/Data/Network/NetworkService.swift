@@ -6,5 +6,6 @@
 //
 
 protocol NetworkService {
-    
+    func getCard(id: Int, select: [String])
+    func getCards(pageSize: Int, page: Int, select: [String])
 }
