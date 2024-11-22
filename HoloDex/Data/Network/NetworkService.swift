@@ -6,5 +6,5 @@
 //
 
 protocol NetworkService {
-    
+//    func request(target: T, completion: @escaping (Result<Response, MoyaError>) -> Void)
 }
