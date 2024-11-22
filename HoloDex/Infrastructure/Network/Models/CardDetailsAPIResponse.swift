@@ -5,11 +5,15 @@
 //  Created by Nathan Stéphant on 21/11/2024.
 //
 
-struct CardDetailsAPIResponse: Codable {
-    let data: CardDetailsAPIModel?
+struct CardDetailsAPIResponse: Decodable {
+    let cardDetailsAPIModel: CardDetailsAPIModel?
+    
+    enum CodingKeys: String, CodingKey {
+        case cardDetailsAPIModel = "data"
+    }
 }
 
-struct CardDetailsAPIModel: Codable {
+struct CardDetailsAPIModel: Decodable {
     let id, name, supertype: String?
     let subtypes: [String]?
     let hp: String?
@@ -36,12 +40,12 @@ struct CardDetailsAPIModel: Codable {
 }
 
 // MARK: - Ability
-struct Ability: Codable {
+struct Ability: Decodable {
     let name, text, type: String?
 }
 
 // MARK: - Attack
-struct Attack: Codable {
+struct Attack: Decodable {
     let name: String?
     let cost: [String]?
     let convertedEnergyCost: Int?
@@ -49,14 +53,14 @@ struct Attack: Codable {
 }
 
 // MARK: - Cardmarket
-struct Cardmarket: Codable {
+struct Cardmarket: Decodable {
     let url: String?
     let updatedAt: String?
     let prices: [String: Double]?
 }
 
 // MARK: - Set
-struct Set: Codable {
+struct Set: Decodable {
     let id, name, series: String?
     let printedTotal, total: Int?
     let legalities: Legalities?
@@ -65,38 +69,38 @@ struct Set: Codable {
 }
 
 // MARK: - SetImages
-struct SetImages: Codable {
+struct SetImages: Decodable {
     let symbol, logo: String?
 }
 
 // MARK: - Legalities
-struct Legalities: Codable {
+struct Legalities: Decodable {
     let unlimited: String?
 }
 
 // MARK: - DataImages
-struct DataImages: Codable {
+struct DataImages: Decodable {
     let small, large: String?
 }
 
 // MARK: - Resistance
-struct Resistance: Codable {
+struct Resistance: Decodable {
     let type, value: String?
 }
 
 // MARK: - Tcgplayer
-struct Tcgplayer: Codable {
+struct Tcgplayer: Decodable {
     let url: String?
     let updatedAt: String?
     let prices: Prices?
 }
 
 // MARK: - Prices
-struct Prices: Codable {
+struct Prices: Decodable {
     let holofoil, reverseHolofoil: Holofoil?
 }
 
 // MARK: - Holofoil
-struct Holofoil: Codable {
+struct Holofoil: Decodable {
     let low, mid, high, market: Double?
 }
