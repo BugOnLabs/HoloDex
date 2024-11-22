@@ -13,13 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
+            AsyncImage(url: URL(string: cardDetails?.cardDetailsAPIModel?.images?.large ?? "")) { image in
+                image.image?.resizable()
+            }
             Text(cardDetails?.cardDetailsAPIModel?.name ?? "Loading...")
         }
         .onAppear {
-            CardDetailsNetworkServiceImpl().fetchCardDetails(cardId: "mcd19-2", select: []) { result in
+            CardDetailsNetworkServiceImpl().fetchCardDetails(cardId: "mcd19-2", select: ["name", "id", "images"]) { result in
                 switch result {
                 case .success(let cardDetails):
                     self.cardDetails = cardDetails
