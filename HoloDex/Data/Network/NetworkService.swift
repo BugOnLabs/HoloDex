@@ -6,6 +6,5 @@
 //
 
 protocol NetworkService {
-    func getCard(id: Int, select: [String])
-    func getCards(pageSize: Int, page: Int, select: [String])
+//    func request(target: T, completion: @escaping (Result<Response, MoyaError>) -> Void)
 }

@@ -6,20 +6,18 @@
 //
 import Moya
 
-class MoyaNetworkServiceImpl: NetworkService {
-    let provider = MoyaProvider<PokemonTcgApi>()
+class MoyaNetworkServiceImpl<T: TargetType> {
+    
+    private let provider: MoyaProvider<T>
+    
+    init() {
+        self.provider = MoyaProvider<T>()
+    }
 
-    func getCard(id: Int, select: [String]) {
-        provider.request(.getCard(id: id, select: select)) { result in
-            // bla bla
+    func request(target: T, completion: @escaping (Result<Response, MoyaError>) -> Void) {
+        provider.request(target) { result in
+            
         }
     }
-    
-    func getCards(pageSize: Int, page: Int, select: [String]) {
-        provider.request(.getCards(pageSize: pageSize, page: page, select: select)) { result in
-            // bla bla
-        }
-    }
-    
-    
+
 }
