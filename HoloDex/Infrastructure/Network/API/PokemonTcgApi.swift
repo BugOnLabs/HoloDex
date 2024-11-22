@@ -8,7 +8,7 @@
 import Moya
 
 enum PokemonTcgApi {
-    case getCard(id: Int, select: [String])
+    case getCard(id: String, select: [String])
     case getCards(pageSize: Int, page: Int, select: [String])
 }
 
