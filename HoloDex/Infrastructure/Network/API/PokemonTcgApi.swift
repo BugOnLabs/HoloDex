@@ -17,8 +17,10 @@ extension PokemonTcgApi: TargetType {
     
     var path: String {
         switch self {
-        case .getCard, .getCards:
-            "/cards"
+        case .getCard(let id, _):
+            "/cards/\(id)"
+        case .getCards(pageSize: let pageSize, page: let page, select: let select):
+            "/cards?pageSize:\(pageSize)&page:\(page)&select:\(select.joined(separator: ","))"
         }
         
     }
@@ -30,14 +32,14 @@ extension PokemonTcgApi: TargetType {
     }
     var task: Task {
         switch self {
-        case .getCard(id: let id, select: let select):
-            .requestParameters(parameters: ["id": id, "select": select.joined(separator: ",")], encoding: URLEncoding.queryString)
-        case .getCards(pageSize: let pageSize, page: let page, select: let select):
-            .requestParameters(parameters: ["pageSize": pageSize, "page": page, "select": select.joined(separator: ",")], encoding: URLEncoding.queryString)
+        case .getCard(_, _):
+            .requestPlain
+        case .getCards(_, _, _):
+            .requestPlain
         }
     }
     
     var headers: [String: String]? {
-        ["Content-type": "application/json"]
+        nil
     }
 }

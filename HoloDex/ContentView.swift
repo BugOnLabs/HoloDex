@@ -15,6 +15,16 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Hello, world!")
         }
+        .onAppear {
+            CardDetailsNetworkServiceImpl().fetchCardDetails(cardId: "mcd19-2", select: []) { result in
+                switch result {
+                case .success(let cardDetails):
+                    print(cardDetails)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
         .padding()
     }
 }
