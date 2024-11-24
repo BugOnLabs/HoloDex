@@ -16,7 +16,14 @@ class MoyaNetworkServiceImpl<T: TargetType> {
 
     func request(target: T, completion: @escaping (Result<Response, MoyaError>) -> Void) {
         provider.request(target) { result in
-            
+            completion(result)
+            switch result {
+            case .success:
+                let response = try! result.get()
+                print("response: \(response)")
+            case .failure: break
+                print("error")
+            }
         }
     }
 

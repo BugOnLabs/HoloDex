@@ -8,12 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var cardDetailsAPIModel: CardDetailsAPIModel? = nil
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            AsyncImage(url: URL(string: cardDetailsAPIModel?.images?.large ?? "")) { image in
+                image.image?.resizable()
+            }
+            Text(cardDetailsAPIModel?.name ?? "Loading...")
+        }
+        .onAppear {
+            CardDetailsNetworkServiceImpl().fetchCardDetails(cardId: "mcd19-2", select: ["name", "id", "images"]) { result in
+                switch result {
+                case .success(let cardDetails):
+                    self.cardDetailsAPIModel = cardDetails.cardDetailsAPIModel
+                    print(cardDetailsAPIModel?.name ?? "No name")
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
         .padding()
     }
