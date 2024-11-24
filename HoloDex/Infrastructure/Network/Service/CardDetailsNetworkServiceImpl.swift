@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CardDetailsNetworkServiceImpl {
+class CardDetailsNetworkServiceImpl: NetworkService {
     
     let networkService: NetworkService = MoyaNetworkServiceImpl()
     
