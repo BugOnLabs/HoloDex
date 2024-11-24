@@ -9,48 +9,39 @@ import SwiftUI
 
 struct CardDetailsView: View {
     
-    @State var cardDetailsAPIModel: CardDetailsAPIModel? = nil
-    let networkService: NetworkService = CardDetailsNetworkServiceImpl()
+    @ObservedObject var viewModel = CardDetailsViewModel()
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                     let screenWidth = geometry.size.width
-                    let imageHeight = screenWidth * 1.395
 
-                    AsyncImage(url: URL(string: cardDetailsAPIModel?.images?.large ?? "")) { phase in
+                AsyncImage(url: URL(string: viewModel.cardDetailsAPIModel?.images?.large ?? "")) { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
-                                .frame(width: screenWidth, height: imageHeight)
+                                .frame(width: screenWidth)
                         case .success(let image):
                             image
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: screenWidth, height: imageHeight)
+                                .frame(width: screenWidth)
                         case .failure:
                             Image(systemName: "exclamationmark.triangle.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: screenWidth, height: imageHeight)
+                                .frame(width: screenWidth)
                                 .foregroundColor(.red)
                         @unknown default:
                             EmptyView()
                         }
                     }
-                Text(cardDetailsAPIModel?.name ?? "Loading...")
+                Text("Name: " + (viewModel.cardDetailsAPIModel?.name ?? "Loading..."))
+                Text("ID: " + (viewModel.cardDetailsAPIModel?.id ?? "Loading..."))
             }
         }
         .onAppear {
-            CardDetailsNetworkServiceImpl().fetchCardDetails(cardId: "mcd19-2", select: ["name", "id", "images"]) { result in
-                switch result {
-                case .success(let cardDetails):
-                    self.cardDetailsAPIModel = cardDetails.cardDetailsAPIModel
-                    print(cardDetailsAPIModel?.name ?? "No name")
-                case .failure(let error):
-                    print(error)
-                }
-            }
+            viewModel.fetchCardDetails(cardId: "xy10-119", select: ["name", "id", "images"])
         }
         .padding()
     }
