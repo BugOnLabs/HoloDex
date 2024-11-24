@@ -5,6 +5,8 @@
 //  Created by Adrien PEREA on 21/11/2024.
 //
 
+import Moya
+
 protocol NetworkService {
-    func fetchCardDetails(cardId: String, select: [String], completion: @escaping (Result<CardDetailsAPIResponse, Error>) -> Void)
+    func request<T:Decodable>(target: TargetType, completion: @escaping (Result<T, Error>) -> Void)
 }

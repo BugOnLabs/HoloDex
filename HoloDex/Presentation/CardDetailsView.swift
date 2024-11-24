@@ -41,7 +41,7 @@ struct CardDetailsView: View {
             }
         }
         .onAppear {
-            viewModel.fetchCardDetails(cardId: "xy10-119", select: ["name", "id", "images"])
+            viewModel.fetchCardDetails(cardId: "xy9-119", select: ["name", "id", "images"])
         }
         .padding()
     }
