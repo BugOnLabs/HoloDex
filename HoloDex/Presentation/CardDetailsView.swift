@@ -14,28 +14,28 @@ struct CardDetailsView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 10) {
-                    let screenWidth = geometry.size.width
-
+                let width = geometry.size.width
+                
                 AsyncImage(url: URL(string: viewModel.cardDetailsAPIModel?.images?.large ?? "")) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: screenWidth)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: screenWidth)
-                        case .failure:
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: screenWidth)
-                                .foregroundColor(.red)
-                        @unknown default:
-                            EmptyView()
-                        }
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: width)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: width)
+                    case .failure:
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: width)
+                            .foregroundColor(.red)
+                    @unknown default:
+                        EmptyView()
                     }
+                }
                 Text("Name: " + (viewModel.cardDetailsAPIModel?.name ?? "Loading..."))
                 Text("ID: " + (viewModel.cardDetailsAPIModel?.id ?? "Loading..."))
             }
