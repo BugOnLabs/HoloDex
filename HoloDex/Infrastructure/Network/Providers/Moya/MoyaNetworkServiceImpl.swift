@@ -6,25 +6,25 @@
 //
 import Moya
 
-class MoyaNetworkServiceImpl<T: TargetType> {
+class MoyaNetworkServiceImpl: NetworkService {
     
-    private let provider: MoyaProvider<T>
+    let provider = MoyaProvider<PokemonTcgApi>()
     
-    init() {
-        self.provider = MoyaProvider<T>()
-    }
+    init() {}
 
-    func request(target: T, completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        provider.request(target) { result in
-            completion(result)
+    func request<T:Decodable>(target: TargetType, completion: @escaping (Result<T, Error>) -> Void) {
+        provider.request(target as! PokemonTcgApi) { result in
             switch result {
-            case .success:
-                let response = try! result.get()
-                print("response: \(response)")
-            case .failure:
-                print("error")
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(T.self, from: response.data)
+                    completion(.success(decodedData))
+                } catch {
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
-
 }

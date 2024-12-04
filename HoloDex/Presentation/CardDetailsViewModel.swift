@@ -9,10 +9,10 @@ import Foundation
 class CardDetailsViewModel: ObservableObject {
     
     @Published var cardDetailsAPIModel: CardDetailsAPIModel? = nil
-    let networkService: NetworkService = CardDetailsNetworkServiceImpl()
+    let cardDetailsNetworkService = CardDetailsNetworkServiceImpl()
     
     func fetchCardDetails(cardId: String, select: [String]) {
-        networkService.request<CardDetailsAPIResponse>(target: PokemonTcgApi.getCard(id: cardId, select: select)) { result in
+        cardDetailsNetworkService.getCardDetail(id: cardId, select: select) { result in
             switch result {
             case .success(let cardDetails):
                 self.cardDetailsAPIModel = cardDetails.cardDetailsAPIModel

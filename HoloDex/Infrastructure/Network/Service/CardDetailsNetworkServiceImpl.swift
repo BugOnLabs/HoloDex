@@ -8,28 +8,18 @@
 import Foundation
 import Moya
 
-class CardDetailsNetworkServiceImpl: NetworkService {
+class CardDetailsNetworkServiceImpl {
     
-    let provider = MoyaNetworkServiceImpl<PokemonTcgApi>()
+    let provider = MoyaNetworkServiceImpl()
     
-    func request<T: Decodable>(target: TargetType, completion: @escaping (Result<T, Error>) -> Void) {
-        provider.request(target: target as! PokemonTcgApi) { result in
+    func getCardDetail(id: String, select: [String], completion: @escaping (Result<CardDetailsAPIResponse, Error>) -> Void) {
+        provider.request(target: PokemonTcgApi.getCard(id: id, select: select)) { (result: Result<CardDetailsAPIResponse, Error>) in
             switch result {
             case .success(let response):
-                do {
-                    guard (200...299).contains(response.statusCode) else {
-                        throw NSError(domain: "", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "Erreur HTTP \(response.statusCode)"])
-                    }
-                    
-                    let decodedData = try JSONDecoder().decode(T.self, from: response.data)
-                    completion(.success(decodedData))
-                } catch {
-                    completion(.failure(error))
-                }
+                completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
-    
 }
