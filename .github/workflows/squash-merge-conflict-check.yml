@@ -18,4 +18,4 @@ jobs:
 
       - name: Output error message if conflicts are detected
         if: failure()
-        run: echo "🚨 Conflit détecté : Vous devez rebaser votre branche sur 'develop' et résoudre les conflits avant de soumettre cette PR."
+        run: echo "🖥️ The workflow is now ready to test your code on the runner."
