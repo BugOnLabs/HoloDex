@@ -1,21 +1,28 @@
 name: Check for Conflicts
+
 on:
   pull_request:
     branches:
       - develop
+
 jobs:
   rebase-check:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Check for conflicts
+      - name: Check for conflicts with develop
         run: |
           git fetch origin develop
           git checkout ${{ github.event.pull_request.head.ref }}
           git rebase origin/develop
 
-      - name: Output error message if conflicts are detected
-        if: failure()
-        run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: Success message
+        if: success() # Condition : L'étape précédente a réussi
+        run: echo " Tout est OK ':' La branche est alignée avec develop."
+
+      - name: Error message if conflicts are detected
+        if: failure() # Condition : L'étape précédente a échoué
+        run: echo "🚨 Conflit détecté ':' Rebasez votre branche sur 'develop' et résolvez les conflits avant de soumettre la PR."
