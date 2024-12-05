@@ -10,10 +10,10 @@ import Moya
 
 class CardsNetworkServiceImpl {
     
-    let provider = MoyaNetworkServiceImpl()
-    
+    let networkService: NetworkService = MoyaNetworkServiceImpl()
+
     func getCards(pageSize: Int, page: Int, select: [String], completion: @escaping (Result<CardsAPIResponse, Error>) -> Void) {
-        provider.request(target: PokemonTcgApi.getCards(pageSize: pageSize, page: page, select: select)) { (result: Result<CardsAPIResponse, Error>) in
+        networkService.request(target: PokemonTcgApi.getCards(pageSize: pageSize, page: page, select: select)) { (result: Result<CardsAPIResponse, Error>) in
             switch result {
             case .success(let response):
                 completion(.success(response))
