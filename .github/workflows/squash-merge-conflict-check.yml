@@ -1,0 +1,35 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - develop # Branche cible de la PR (par exemple, "develop")
+
+jobs:
+  pr-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display PR Information
+        run: |
+          echo "🎉 This workflow was triggered by a pull request!"
+          echo "🔎 Branch source: ${{ github.head_ref }}"
+          echo "🔎 Branch target: ${{ github.base_ref }}"
+          echo "🔗 PR URL: ${{ github.event.pull_request.html_url }}"
+
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify rebasing
+        run: |
+          git fetch origin ${{ github.base_ref }} # Récupère la branche cible
+          git checkout ${{ github.head_ref }} # Passe à la branche source
+          git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD || exit 1 # Vérifie si la branche source contient les commits de la branche cible
+        continue-on-error: false
+
+      - name: Success
+        if: ${{ success() }}
+        run: echo "✅ Branch source is correctly rebased on branch target!"
+
+      - name: Fail
+        if: ${{ failure() }}
+        run: echo "❌ Branch source is NOT rebased on branch target. Please rebase."
