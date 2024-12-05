@@ -3,6 +3,13 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push: # Déclenchement automatique lors d'un push
   workflow_dispatch: # Déclenchement manuel via l'interface GitHub Actions
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags' 
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
