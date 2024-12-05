@@ -1,0 +1,21 @@
+name: Check for Conflicts
+on:
+  pull_request:
+    branches:
+      - develop
+jobs:
+  rebase-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check for conflicts
+        run: |
+          git fetch origin develop
+          git checkout ${{ github.event.pull_request.head.ref }}
+          git rebase origin/develop
+          
+      - name: Output error message if conflicts are detected
+        if: failure()
+        run: echo "🚨 Conflit détecté : Vous devez rebaser votre branche sur 'develop' et résoudre les conflits avant de soumettre cette PR. Consultez le WIKI ---> [Workflow pour les branches features](https://github.com/Nathan765/HoloDex/wiki/Workflow-pour-les-branches-features)"
