@@ -12,7 +12,7 @@ class CardDetailsViewModel: ObservableObject {
     let cardDetailsNetworkService = CardDetailsNetworkServiceImpl()
     
     func fetchCardDetails(cardId: String, select: [String]) {
-        cardDetailsNetworkService.getCardDetail(id: cardId, select: select) { result in
+        cardDetailsNetworkService.fetchCardDetails(cardId: cardId, select: select) { result in
             switch result {
             case .success(let cardDetails):
                 self.cardDetailsAPIModel = cardDetails.cardDetailsAPIModel
