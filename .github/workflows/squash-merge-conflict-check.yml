@@ -3,7 +3,7 @@ name: Pull Request Workflow
 on:
   pull_request:
     branches:
-      - develop # Branche cible de la PR (par exemple, "develop")
+      - develop # Branche cible de la PR
 
 jobs:
   pr-job:
@@ -18,13 +18,17 @@ jobs:
 
       - name: Check out repository code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }} # Assure de récupérer la branche source
+
+      - name: Fetch target branch
+        run: |
+          git fetch origin ${{ github.base_ref }} # Récupère la branche cible
 
       - name: Verify rebasing
         run: |
-          git fetch origin ${{ github.base_ref }} # Récupère la branche cible
-          git checkout ${{ github.head_ref }} # Passe à la branche source
-          git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD || exit 1 # Vérifie si la branche source contient les commits de la branche cible
-        continue-on-error: false
+          # Vérifie si la branche cible est un ancêtre de la branche source
+          git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD || exit 1
 
       - name: Success
         if: ${{ success() }}
