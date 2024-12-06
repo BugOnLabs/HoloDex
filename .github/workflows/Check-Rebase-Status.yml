@@ -7,6 +7,14 @@ jobs:
   check_rebase:
     runs-on: ubuntu-latest
     steps:
+      - name: Display PR Information
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+          echo "🔎 Branch source: ${{ github.head_ref }}"
+          echo "🔎 Branch target: ${{ github.base_ref }}"
+          echo "🔗 PR URL: ${{ github.event.pull_request.html_url }}"
+      
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
