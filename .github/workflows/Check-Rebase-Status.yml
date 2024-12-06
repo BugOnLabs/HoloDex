@@ -4,10 +4,10 @@ on:
    branches: [develop]
 
 jobs:
- 🔍 collect-info:
+ collect-info:
    runs-on: ubuntu-latest
    steps:
-     - name: 📋 PR Details
+     - name: PR Details
        run: |
          echo "════════════════════════════════════════"
          echo "🔄 Pull Request Information"
@@ -21,15 +21,15 @@ jobs:
          echo "🌐 URL      : ${{ github.event.pull_request.html_url }}"
          echo "════════════════════════════════════════"
 
- 🔄 check-rebase:
-   needs: 🔍 collect-info
+ check-rebase:
+   needs: collect-info
    runs-on: ubuntu-latest
    steps:
      - uses: actions/checkout@v4
        with:
          fetch-depth: 0
          
-     - name: 🔍 Analyse Branches
+     - name: Branch Analysis
        run: |
          echo "════════════════════════════════════════"
          echo "🔄 Branch Analysis"
