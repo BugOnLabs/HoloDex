@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import Moya
 
 class CardDetailsNetworkServiceImpl {
     
     let networkService: NetworkService = MoyaNetworkServiceImpl()
     
-    func getCardDetail(id: String, select: [String], completion: @escaping (Result<CardDetailsAPIResponse, Error>) -> Void) {
-        networkService.request(target: PokemonTcgApi.getCard(id: id, select: select)) { (result: Result<CardDetailsAPIResponse, Error>) in
+    func fetchCardDetails(cardId: String, select: [String], completion: @escaping (Result<CardDetailsAPIResponse, Error>) -> Void) {
+        networkService.request(target: PokemonTcgApi.getCard(id: cardId, select: select)) { (result: Result<CardDetailsAPIResponse, Error>) in
             switch result {
             case .success(let response):
                 completion(.success(response))
