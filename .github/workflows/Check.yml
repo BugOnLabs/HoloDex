@@ -1,0 +1,8 @@
+name: Required Check
+on:
+  pull_request:
+jobs:
+  required:
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 0
