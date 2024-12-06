@@ -1,0 +1,23 @@
+name: Check Rebase Status
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  check_rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # à voir ?
+      - name: Check if branch needs rebase
+        run: |
+          git fetch origin
+          if git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD; then
+            echo "✅ Branch is up to date"
+            exit 0
+          else
+            echo "❌ Branch needs rebase on ${{ github.base_ref }}"
+            exit 1
+          fi
