@@ -10,14 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # à voir ?
-      - name: Check if branch needs rebase
+          fetch-depth: 0  # à voir ?          
+      - name: Check if branch needs rebase 2
         run: |
           git fetch origin
-          if git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD; then
-            echo "✅ Branch is up to date"
-            exit 0
-          else
+          BEHIND=$(git rev-list --count origin/${{ github.base_ref }}..HEAD)
+          if [ $BEHIND -gt 0 ]; then
             echo "❌ Branch needs rebase on ${{ github.base_ref }}"
             exit 1
+          else
+            echo "✅ Branch is up to date"
+            exit 0
           fi
