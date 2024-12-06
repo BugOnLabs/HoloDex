@@ -9,6 +9,10 @@ import SwiftUI
 
 struct CardDetailsView: View {
     
+    init(card: CardDetailsAPIModel?) {
+        self.viewModel.cardDetailsAPIModel = card
+    }
+    
     @ObservedObject var viewModel = CardDetailsViewModel()
     
     var body: some View {
@@ -48,5 +52,5 @@ struct CardDetailsView: View {
 }
 
 #Preview {
-    CardDetailsView()
+    CardDetailsView(card: nil)
 }
