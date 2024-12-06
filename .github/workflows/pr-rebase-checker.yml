@@ -1,0 +1,67 @@
+name: Check Rebase Status
+on:
+  pull_request:
+    branches:
+      - develop
+jobs:
+# 1st job
+ collect-info:
+   runs-on: ubuntu-latest
+   steps:
+     - name: PR Details
+       run: |
+         echo "══════════"
+         echo "🔄 Pull Request Information"
+         echo "══════════"
+         echo "📝 Title    : ${{ github.event.pull_request.title }}"
+         echo "🔢 Number   : #${{ github.event.pull_request.number }}"
+         echo "👤 Author   : ${{ github.event.pull_request.user.login }}"
+         echo "⏰ Created  : ${{ github.event.pull_request.created_at }}"
+         echo "🔀 Source   : ${{ github.head_ref }}"
+         echo "🎯 Target   : ${{ github.base_ref }}"
+         echo "🌐 URL      : ${{ github.event.pull_request.html_url }}"
+         echo "══════════"
+
+# 2nd job
+ check-rebase:
+   needs: collect-info
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+       with:
+         fetch-depth: 0
+         
+     - name: Branch Analysis
+       run: |
+         echo "══════════"
+         echo "🔄 Branch Analysis"
+         echo "══════════"
+         git fetch origin
+         AHEAD=$(git rev-list --count origin/${{ github.base_ref }}..HEAD)
+         BEHIND=$(git rev-list --count HEAD..origin/${{ github.base_ref }})
+         TOTAL_COMMITS=$(git rev-list --count HEAD)
+         LAST_COMMIT=$(git log -1 --pretty=%B)
+         
+         echo "📊 Status Summary"
+         echo "├── 📈 Total commits  : $TOTAL_COMMITS"
+         echo "├── 🔼 Ahead by      : $AHEAD commits"
+         echo "├── 🔽 Behind by     : $BEHIND commits"
+         echo "└── 📝 Last commit   : $LAST_COMMIT"
+         
+         if [ $BEHIND -gt 0 ]; then
+           echo ""
+           echo "❌ REBASE REQUIRED"
+           echo "══════════"
+           echo "💢 Branch is $BEHIND commits behind ${{ github.base_ref }}"
+           echo ""
+           echo "💡 To fix:"
+           echo "1️⃣ git checkout ${{ github.head_ref }}"
+           echo "2️⃣ git pull --rebase origin ${{ github.base_ref }}"
+           echo "3️⃣ git push --force-with-lease"
+         echo "══════════"
+           exit 1
+         else
+           echo ""
+           echo "✅ BRANCH UP TO DATE 🤌 🎊"
+           echo "══════════"
+         fi
