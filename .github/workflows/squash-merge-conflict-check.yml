@@ -21,9 +21,19 @@ jobs:
         with:
           ref: ${{ github.head_ref }} # Assure de récupérer la branche source
 
+      - name: Fetch branches
+        run: |
+          git fetch origin ${{ github.base_ref }} # Récupère la branche cible
+          git fetch origin ${{ github.head_ref }} # Récupère la branche source
+
       - name: Fetch target branch
         run: |
           git fetch origin ${{ github.base_ref }} # Récupère la branche cible
+
+      - name: Debug Git branches
+        run: |
+          git branch -a # Liste toutes les branches locales et distantes
+          git log --oneline --graph --decorate --all # Affiche l'historique Git
 
       - name: Verify rebasing
         run: |
