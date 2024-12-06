@@ -3,22 +3,19 @@ on:
   pull_request:
     branches:
       - develop
-
 jobs:
   check_rebase:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # à voir ?          
-      - name: Check if branch needs rebase 2
+          fetch-depth: 0
+      - name: Check if branch needs rebase
         run: |
           git fetch origin
-          BEHIND=$(git rev-list --count origin/${{ github.base_ref }}..HEAD)
+          BEHIND=$(git rev-list --count HEAD..origin/${{ github.base_ref }})
+          echo "🔎 Branch is $BEHIND commits behind develop"
           if [ $BEHIND -gt 0 ]; then
-            echo "❌ Branch needs rebase on ${{ github.base_ref }}"
+            echo "❌ Branch needs rebase"
             exit 1
-          else
-            echo "✅ Branch is up to date"
-            exit 0
           fi
