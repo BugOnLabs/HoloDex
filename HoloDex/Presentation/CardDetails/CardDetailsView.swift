@@ -14,6 +14,8 @@ struct CardDetailsView: View {
     }
     
     @ObservedObject var viewModel = CardDetailsViewModel()
+    @State var translation: CGSize = .zero
+    @State var isDragging = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -40,6 +42,8 @@ struct CardDetailsView: View {
                         EmptyView()
                     }
                 }
+                .rotation3DEffect(.degrees(isDragging ? 10 : 0), axis: (x: -translation.height, y: translation.width, z: 0))
+                .gesture(drag)
                 Text("Name: " + (viewModel.cardDetailsAPIModel?.name ?? "Loading..."))
                 Text("ID: " + (viewModel.cardDetailsAPIModel?.id ?? "Loading..."))
             }
@@ -48,6 +52,20 @@ struct CardDetailsView: View {
             viewModel.fetchCardDetails(cardId: "xy9-119", select: ["name", "id", "images"])
         }
         .padding()
+    }
+    
+    var drag: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                translation = value.translation
+                isDragging = true
+            }
+            .onEnded { value in
+                withAnimation {
+                    translation = .zero
+                    isDragging = false
+                }
+            }
     }
 }
 
