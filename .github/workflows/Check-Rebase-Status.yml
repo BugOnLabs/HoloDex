@@ -1,21 +1,44 @@
-name: Check Rebase Status
+name: PR Rebase Check
 on:
-  pull_request:
-    branches:
-      - develop
+ pull_request:
+   branches: [develop]
+
 jobs:
-  check_rebase:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Check if branch needs rebase
-        run: |
-          git fetch origin
-          BEHIND=$(git rev-list --count HEAD..origin/${{ github.base_ref }})
-          echo "🔎 Branch is $BEHIND commits behind develop"
-          if [ $BEHIND -gt 0 ]; then
-            echo "❌ Branch needs rebase"
-            exit 1
-          fi
+ info:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Collect PR Info
+       run: |
+         echo "📊 PR Details"
+         echo "├── 🔀 PR #${{ github.event.pull_request.number }}"
+         echo "├── 📝 Title: ${{ github.event.pull_request.title }}"
+         echo "├── 👤 Author: ${{ github.event.pull_request.user.login }}"
+         echo "├── 🌿 Source: ${{ github.head_ref }}"
+         echo "└── 🎯 Target: ${{ github.base_ref }}"
+
+ check:
+   needs: info
+   runs-on: ubuntu-latest
+   steps:
+     - uses: actions/checkout@v4
+       with:
+         fetch-depth: 0
+         
+     - name: Check Rebase Status
+       run: |
+         git fetch origin
+         AHEAD=$(git rev-list --count origin/${{ github.base_ref }}..HEAD)
+         BEHIND=$(git rev-list --count HEAD..origin/${{ github.base_ref }})
+         
+         echo "📊 Branch Status"
+         echo "├── 🔼 Commits ahead: $AHEAD"
+         echo "└── 🔽 Commits behind: $BEHIND"
+         
+         if [ $BEHIND -gt 0 ]; then
+           echo "❌ Rebase Required"
+           echo "└── Missing $BEHIND commits from ${{ github.base_ref }}"
+           echo "💡 Run: git pull --rebase origin ${{ github.base_ref }}"
+           exit 1
+         else
+           echo "✅ Branch up-to-date with ${{ github.base_ref }}"
+         fi
