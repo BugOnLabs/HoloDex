@@ -1,7 +1,8 @@
 name: Check Rebase Status
 on:
   pull_request:
-    types: [opened, synchronize]
+    branches:
+      - develop
 
 jobs:
   check_rebase:
@@ -9,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # à voir ?
       - name: Check if branch needs rebase
         run: |
           git fetch origin
