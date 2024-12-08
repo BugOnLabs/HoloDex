@@ -9,11 +9,16 @@ import Foundation
 
 class CardsViewModel: ObservableObject {
     
+    init(cardsUseCase: GetCardsUseCase) {
+        self.cardsUseCase = cardsUseCase
+    }
+    
     @Published var cardDetailsAPIModels: [CardDetailsAPIModel]? = nil
-    let cardsNetworkService = CardsNetworkServiceImpl()
+
+    let cardsUseCase: GetCardsUseCase
     
     func fetchCards(pageSize: Int, page: Int, select: [String]) {
-        cardsNetworkService.getCards(pageSize: pageSize, page: page, select: select){ result in
+        cardsUseCase.getCards(requestValue: GetCardsUseCaseRequestValue(pageSize: pageSize, page: page, select: select)){ result in
             switch result {
             case .success(let cardsApiResponse):
                 self.cardDetailsAPIModels = cardsApiResponse.cardDetailsAPIModels
