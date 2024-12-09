@@ -8,7 +8,7 @@
 import Foundation
 
 protocol GetCardsUseCase {
-    func getCards(
+    func execute(
         requestValue: GetCardsUseCaseRequestValue,
         completion: @escaping (Result<CardsAPIResponse, Error>) -> Void
     )
@@ -23,13 +23,11 @@ struct GetCardsUseCaseRequestValue: Equatable {
 final class DefaultGetCardsUseCase: GetCardsUseCase {
     private let cardsRepository: CardsRepository
 
-    init(
-        cardsRepository: CardsRepository
-    ) {
+    init(cardsRepository: CardsRepository) {
         self.cardsRepository = cardsRepository
     }
 
-    func getCards(requestValue: GetCardsUseCaseRequestValue, completion: @escaping (Result<CardsAPIResponse, any Error>) -> Void) {
+    func execute(requestValue: GetCardsUseCaseRequestValue, completion: @escaping (Result<CardsAPIResponse, any Error>) -> Void) {
         return cardsRepository.fetchCardsList(pageSize: requestValue.pageSize,
                                                 page: requestValue.page,
                                                 select: requestValue.select,

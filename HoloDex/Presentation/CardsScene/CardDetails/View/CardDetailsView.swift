@@ -9,11 +9,12 @@ import SwiftUI
 
 struct CardDetailsView: View {
     
-    init(card: CardDetailsAPIModel?) {
+    init(card: CardDetailsAPIModel?, viewModel: CardDetailsViewModel) {
+        self.viewModel = viewModel
         self.viewModel.cardDetailsAPIModel = card
     }
     
-    @ObservedObject var viewModel = CardDetailsViewModel()
+    @ObservedObject var viewModel: CardDetailsViewModel
     @State var translation: CGSize = .zero
     @State var isDragging = false
     
@@ -70,5 +71,5 @@ struct CardDetailsView: View {
 }
 
 #Preview {
-    CardDetailsView(card: nil)
+//    CardDetailsView(card: nil)
 }

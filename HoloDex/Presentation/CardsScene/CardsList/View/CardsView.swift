@@ -58,5 +58,5 @@ struct CardsView: View {
 }
 
 #Preview {
-    CardsView()
+//    CardsView(viewModel: CardsViewModel(getCardsUseCase: DefaultGetCardsUseCase(cardsRepository: CardsRepository())))
 }

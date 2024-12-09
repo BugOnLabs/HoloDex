@@ -8,12 +8,17 @@ import Foundation
 
 class CardDetailsViewModel: ObservableObject {
     
+    init(getCardDetailsUseCase: GetCardDetailsUseCase) {
+        self.getCardDetailsUseCase = getCardDetailsUseCase
+    }
+    
     @Published var cardDetailsAPIModel: CardDetailsAPIModel? = nil
-    let cardDetailsNetworkService = CardDetailsNetworkServiceImpl()
+    
+    private let getCardDetailsUseCase: GetCardDetailsUseCase
     
     func fetchCardDetails(cardId: String, select: [String]) {
         if cardDetailsAPIModel == nil {
-            cardDetailsNetworkService.fetchCardDetails(cardId: cardId, select: select) { result in
+            getCardDetailsUseCase.execute(requestValue: GetCardDetailsUseCaseRequestValue(cardId: cardId, select: select)) { result in
                 switch result {
                 case .success(let cardDetails):
                     self.cardDetailsAPIModel = cardDetails.cardDetailsAPIModel
