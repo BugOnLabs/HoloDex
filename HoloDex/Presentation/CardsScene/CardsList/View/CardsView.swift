@@ -31,9 +31,6 @@ struct CardsView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: UIScreen.main.bounds.width / 2 - 16)
-                                        .onTapGesture {
-
-                                        }
                                 case .failure:
                                     Image(systemName: "exclamationmark.triangle.fill")
                                         .resizable()
@@ -58,5 +55,5 @@ struct CardsView: View {
 }
 
 #Preview {
-//    CardsView(viewModel: CardsViewModel(getCardsUseCase: DefaultGetCardsUseCase(cardsRepository: CardsRepository())))
+    CardsView(viewModel: CardsViewModel(getCardsUseCase: DefaultGetCardsUseCase(cardsRepository: DefaultCardsRepository())))
 }

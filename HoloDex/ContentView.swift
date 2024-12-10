@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        CardsView()
+        CardsView(viewModel: CardsViewModel(getCardsUseCase: DefaultGetCardsUseCase(cardsRepository: DefaultCardsRepository())))
     }
 }
 

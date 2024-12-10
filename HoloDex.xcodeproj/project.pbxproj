@@ -42,6 +42,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		082044F72D05F6C90096D318 /* Domain */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Domain; sourceTree = "<group>"; };
 		082045002D05F74D0096D318 /* CardsScene */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CardsScene; sourceTree = "<group>"; };
+		08F393892D08D3BB00C4CB5D /* Repository */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Repository; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +68,7 @@
 		088EA7972CEFD88700CE9D9A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				08F393892D08D3BB00C4CB5D /* Repository */,
 				088EA79A2CEFDA9800CE9D9A /* Network */,
 			);
 			path = Data;
@@ -219,6 +221,7 @@
 			fileSystemSynchronizedGroups = (
 				082044F72D05F6C90096D318 /* Domain */,
 				082045002D05F74D0096D318 /* CardsScene */,
+				08F393892D08D3BB00C4CB5D /* Repository */,
 			);
 			name = HoloDex;
 			productName = HoloDex;
