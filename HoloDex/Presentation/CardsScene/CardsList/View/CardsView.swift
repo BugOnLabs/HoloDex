@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardsView: View {
     
-    @ObservedObject var viewModel = CardsViewModel()
+    @ObservedObject var viewModel: CardsViewModel
     
     var body: some View {
         NavigationView {
@@ -31,9 +31,6 @@ struct CardsView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: UIScreen.main.bounds.width / 2 - 16)
-                                        .onTapGesture {
-
-                                        }
                                 case .failure:
                                     Image(systemName: "exclamationmark.triangle.fill")
                                         .resizable()
@@ -52,11 +49,11 @@ struct CardsView: View {
 
         }
         .onAppear {
-            viewModel.fetchCards(pageSize: 50, page: 1, select: ["name", "id", "images"])
+            viewModel.fetchCards(pageSize: 20, page: 1, select: ["name", "id", "images"])
         }
     }
 }
 
 #Preview {
-    CardsView()
+    CardsView(viewModel: CardsViewModel(getCardsUseCase: DefaultGetCardsUseCase(cardsRepository: DefaultCardsRepository())))
 }
